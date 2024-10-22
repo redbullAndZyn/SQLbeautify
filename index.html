@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic Page Needs -->
+    <meta charset="UTF-8">
+    <title>Home - redbullAndZyn.com</title>
+    <meta name="description" content="redbullAndZyn.com - Collection of small useful web tools.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- CSS Stylesheet -->
+    <style>
+        /* Body Styling */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f9fc;
+            color: #333;
+        }
+        /* Navigation Bar */
+        nav {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+        }
+        nav h1 {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            margin: 0;
+        }
+        nav img.logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        nav a {
+            color: #333;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+        }
+        /* Main Content */
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        ul.tool-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul.tool-list li {
+            margin-bottom: 15px;
+        }
+        ul.tool-list a {
+            color: #007acc;
+            text-decoration: none;
+            font-size: 20px;
+        }
+        ul.tool-list a:hover {
+            text-decoration: underline;
+        }
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #ffffff;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <h1>
+            <img src="https://picsum.photos/40" alt="Logo" class="logo">
+            redbullAndZyn.com
+        </h1>
+        <a href="index.html">Home</a>
+        <!-- Add links to other tools here -->
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <h2>Welcome to redbullAndZyn.com</h2>
+        <p>A collection of small and useful web tools.</p>
+        <h3>Available Tools:</h3>
+        <ul class="tool-list">
+            <li><a href="sql-beautifier.html">SQL Beautifier</a></li>
+            <!-- Add more tools here -->
+        </ul>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        &copy; <span id="year"></span> redbullAndZyn.com
+    </footer>
+    
+    <!-- JavaScript Code -->
+    <script>
+        // Set the current year dynamically
+        const yearSpan = document.getElementById('year');
+        const currentYear = new Date().getFullYear();
+        yearSpan.textContent = currentYear;
+    </script>
+</body>
+</html>
