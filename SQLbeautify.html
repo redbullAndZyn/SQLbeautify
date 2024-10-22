@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic Page Needs -->
+    <meta charset="UTF-8">
+    <title>SQL Beautifier - redbullAndZyn.com</title>
+    <meta name="description" content="Beautify and format your SQL queries easily with redbullAndZyn.com's online SQL Beautifier. Improve readability and follow best practices.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- CSS Stylesheet -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f9fc;
+            color: #333;
+        }
+        /* Navigation Bar */
+        nav {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+        }
+        nav h1 {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            margin: 0;
+        }
+        nav img.logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        nav a {
+            color: #333;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+        }
+        /* Main Content */
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            font-family: monospace;
+            font-size: 14px;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #fff;
+            background-color: #007acc;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #005fa3;
+        }
+        .output {
+            margin-top: 20px;
+        }
+        .output-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .copy-button {
+            padding: 5px 10px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #fff;
+            background-color: #28a745;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .copy-button:hover {
+            background-color: #218838;
+        }
+        pre {
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        .error {
+            color: #d8000c;
+            background-color: #ffd2d2;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        /* SEO Content */
+        .seo-content {
+            margin-top: 40px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #ffffff;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 40px;
+        }
+    </style>
+    
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/sql-formatter@4.0.2/dist/sql-formatter.min.js"></script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <h1>
+            <img src="https://picsum.photos/40" alt="Logo" class="logo">
+            redbullAndZyn.com
+        </h1>
+        <a href="index.html">Home</a>
+        <!-- Add links to other tools here -->
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <h2>SQL Beautifier</h2>
+        <p>Paste your SQL query below and click "Beautify SQL" to format it for better readability.</p>
+        <textarea id="inputSql" placeholder="Enter your SQL query here..."></textarea>
+        <button id="beautifyButton">Beautify SQL</button>
+        <div id="output" class="output" style="display: none;">
+            <div class="output-header">
+                <h3>Beautified SQL:</h3>
+                <button id="copyButton" class="copy-button">Copy</button>
+            </div>
+            <pre><code id="outputSql"></code></pre>
+        </div>
+        <div id="error" class="error" style="display: none;"></div>
+        
+        <!-- SEO Content -->
+        <div class="seo-content">
+            <h3>About SQL Beautification</h3>
+            <p>
+                Writing SQL queries can sometimes result in complex and hard-to-read statements, especially when dealing with multiple joins, subqueries, and nested functions. Formatting SQL queries improves readability and maintainability, making it easier to review and debug code.
+            </p>
+            <h3>Best Practices for SQL Formatting</h3>
+            <ul>
+                <li>Use uppercase for SQL keywords (SELECT, FROM, WHERE, etc.) to distinguish them from column and table names.</li>
+                <li>Indent nested queries and blocks for clarity.</li>
+                <li>Place each column in SELECT statements on a new line when dealing with multiple columns.</li>
+                <li>Align JOIN clauses and conditions to show relationships between tables.</li>
+                <li>Comment your code to explain complex logic or calculations.</li>
+            </ul>
+            <p>
+                Our SQL Beautifier tool automatically applies these best practices to your SQL queries, helping you to write cleaner and more efficient code.
+            </p>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        &copy; <span id="year"></span> redbullAndZyn.com
+    </footer>
+    
+    <!-- JavaScript Code -->
+    <script>
+        const beautifyButton = document.getElementById('beautifyButton');
+        const inputSql = document.getElementById('inputSql');
+        const outputDiv = document.getElementById('output');
+        const outputSql = document.getElementById('outputSql');
+        const copyButton = document.getElementById('copyButton');
+        const errorDiv = document.getElementById('error');
+        const yearSpan = document.getElementById('year');
+
+        // Set the current year dynamically
+        const currentYear = new Date().getFullYear();
+        yearSpan.textContent = currentYear;
+
+        beautifyButton.addEventListener('click', () => {
+            const sql = inputSql.value.trim();
+            if (sql === '') {
+                showError('Please enter an SQL query.');
+                return;
+            }
+            try {
+                const formattedSql = sqlFormatter.format(sql, { language: 'mysql' });
+                outputSql.textContent = formattedSql;
+                outputDiv.style.display = 'block';
+                errorDiv.style.display = 'none';
+            } catch (e) {
+                showError('An error occurred while formatting your SQL. Please check your query syntax.');
+            }
+        });
+
+        copyButton.addEventListener('click', () => {
+            const sql = outputSql.textContent;
+            navigator.clipboard.writeText(sql).then(() => {
+                copyButton.textContent = 'Copied!';
+                setTimeout(() => {
+                    copyButton.textContent = 'Copy';
+                }, 2000);
+            }).catch(err => {
+                showError('Failed to copy text: ' + err);
+            });
+        });
+
+        function showError(message) {
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            outputDiv.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
